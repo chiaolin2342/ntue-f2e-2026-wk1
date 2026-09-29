@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vegetables</title>
+  
+  <!-- 引入 Google Fonts: Noto Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- 引入 FontAwesome 圖示 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    /* ==========================================================================
+       Design System Variables (完全對照設計稿規範)
+       ========================================================================== */
+    :root {
+      /* Color System */
+      --color-primary: #77843D;       /* Primary 橄欖綠 */
+      --color-bg: #EDF2C5;            /* background 整體背景米綠色 */
+      --color-content-text: #707070;   /* content_text 內文深灰 */
+      --color-content-bg: #F7FBD6;     /* content_bg 區塊卡片淺黃背景 */
+      --color-white: #FFFFFF;
+
+      /* Typography System */
+      --font-family: 'Noto Sans', sans-serif;
+      --font-head1: 700 44px/normal var(--font-family);
+      --font-head2: 700 16px/1.3 var(--font-family);
+      --font-text1: 400 14px/1.4 var(--font-family);
+      --font-text2: 400 12px/1.3 var(--font-family);
+    }
+
+    /* ==========================================================================
+       Base & Reset
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--color-bg);
+      color: var(--color-content-text);
+      display: flex;
+      justify-content: center;
+      padding: 30px 15px;
+    }
+
+    .page-container {
+      width: 100%;
+      max-width: 960px;
+    }
+
+    /* ==========================================================================
+       Header (Logo + Social & Auth)
+       ========================================================================== */
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 12px;
+    }
+
+    .logo {
+      font: var(--font-head1);
+      color: var(--color-primary);
+      line-height: 1;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 6px;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      background-color: var(--color-primary);
+      color: var(--color-bg);
+      text-decoration: none;
+      border-radius: 2px;
+      font-size: 13px;
+      transition: opacity 0.2s ease;
+    }
+
+    .social-icons a:hover {
+      opacity: 0.85;
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-auth {
+      background: transparent;
+      border: 1px solid var(--color-primary);
+      color: var(--color-primary);
+      padding: 2px 10px;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-auth:hover {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+    }
+
+    /* ==========================================================================
+       Navigation Bar
+       ========================================================================== */
+    .main-nav {
+      background-color: var(--color-primary);
+      margin-bottom: 15px;
+    }
+
+    .main-nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    .main-nav a {
+      display: block;
+      padding: 8px 24px;
+      color: var(--color-white);
+      text-decoration: none;
+      font: var(--font-text1);
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+      background-color: rgba(0, 0, 0, 0.12);
+    }
+
+    /* ==========================================================================
+       Main Banner
+       ========================================================================== */
+    .banner-section {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .banner-img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ==========================================================================
+       Bottom Columns (Vegetables Gallery & Contact)
+       ========================================================================== */
+    .columns-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .col-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      font: var(--font-head2);
+      padding: 6px 14px;
+    }
+
+    .card-body {
+      background-color: var(--color-content-bg);
+      padding: 16px;
+      height: 100%;
+    }
+
+    /* Vegetables 縮圖網格 */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .thumb-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Contact 文字與資訊 */
+    .contact-desc {
+      font: var(--font-text2);
+      line-height: 1.5;
+      color: var(--color-content-text);
+      margin-bottom: 14px;
+    }
+
+    .contact-divider {
+      border: none;
+      border-top: 1px solid rgba(112, 112, 112, 0.25);
+      margin-bottom: 12px;
+    }
+
+    .contact-info p {
+      font: var(--font-text2);
+      line-height: 1.6;
+      color: var(--color-content-text);
+    }
+
+    .contact-info span {
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       Footer
+       ========================================================================== */
+    .site-footer {
+      background-color: var(--color-primary);
+      text-align: center;
+      padding: 14px 10px;
+    }
+
+    .site-footer p {
+      color: var(--color-white);
+      font: var(--font-text2);
+      letter-spacing: 0.5px;
+    }
+
+    /* ==========================================================================
+       RWD 響應式 (手機/平版適配)
+       ========================================================================== */
+    @media (max-width: 768px) {
+      .site-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .main-nav ul {
+        flex-wrap: wrap;
+      }
+
+      .columns-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .banner-img {
+        height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Header -->
+    <header class="site-header">
+      <h1 class="logo">Vegetables</h1>
+      <div class="header-actions">
+        <div class="social-icons">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+        <div class="auth-buttons">
+          <button class="btn-auth">LOGIN</button>
+          <button class="btn-auth">JOIN</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Vegetables</a></li>
+        <li><a href="#">Online</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Main Banner -->
+      <section class="banner-section">
+        <img src="IMAGES/banner-pumpkin.png" alt="Pumpkins banner" class="banner-img" />
+      </section>
+
+      <!-- Bottom Columns -->
+      <section class="columns-grid">
+        <!-- Left: Vegetables Gallery -->
+        <article class="col-card">
+          <h2 class="card-header">Vegetables</h2>
+          <div class="card-body gallery-grid">
+            <img src="IMAGES/carrots.png" alt="Carrots" class="thumb-img" />
+            <img src="IMAGES/corn.png" alt="Corn" class="thumb-img" />
+            <img src="IMAGES/bell-peppers.png" alt="Bell Peppers" class="thumb-img" />
+          </div>
+        </article>
+
+        <!-- Right: Contact -->
+        <article class="col-card">
+          <h2 class="card-header">Contact</h2>
+          <div class="card-body contact-body">
+            <p class="contact-desc">
+              For any questions or suggestions about Vegetables, vegetables Online your online order you can contact Vegetables Customer Service by phone, email or post and we'll be happy to help.
+            </p>
+            <hr class="contact-divider" />
+            <div class="contact-info">
+              <p><span>E-mail :</span> Vegetables@vegetables.com</p>
+              <p><span>PHONE :</span> +886-123-456-789</p>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>Copyright 2017 Vegetables.com / Design by Vegetables</p>
+    </footer>
+  </div>
+</body>
+</html>
